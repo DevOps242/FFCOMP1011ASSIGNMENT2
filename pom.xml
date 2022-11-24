@@ -15,6 +15,14 @@
     </properties>
 
     <dependencies>
+
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10</version>
+        </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -61,7 +69,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.ffcomp1011assignment2/com.example.ffcomp1011assignment2.HelloApplication
+                                com.example.ffcomp1011assignment2/com.example.ffcomp1011assignment2.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
