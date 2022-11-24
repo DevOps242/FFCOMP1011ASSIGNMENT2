@@ -19,33 +19,38 @@
    <children>
       <BorderPane layoutX="47.0" layoutY="70.0" prefHeight="800.0" prefWidth="1000.0" stylesheets="@styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <Label prefHeight="32.0" prefWidth="113.0" text="Barrie Library" BorderPane.alignment="CENTER" />
+            <Label id="header" prefHeight="32.0" prefWidth="113.0" text="Barrie Library" BorderPane.alignment="CENTER" />
          </top>
          <bottom>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="listenButton" mnemonicParsing="false" text="Listen to Book" />
+                  <Button fx:id="previewLabel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Preview Book" />
+                  <Button fx:id="purchaseBookButton" mnemonicParsing="false" text="Purchase Book" />
                </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
             </HBox>
          </bottom>
          <right>
-            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <TextField prefHeight="26.0" prefWidth="168.0" promptText="Search Books">
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" text="Search" />
-                     </children>
-                  </VBox>
-               </children>
+            <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </BorderPane.margin>
-            </HBox>
+               <children>
+                  <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="112.0" text="errors will go here" />
+                  <HBox alignment="CENTER" prefHeight="59.0" prefWidth="200.0">
+                     <children>
+                        <TextField alignment="CENTER" promptText="Search Books" />
+                     </children>
+                  </HBox>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" />
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </VBox>
          </right>
          <left>
             <VBox prefHeight="668.0" prefWidth="164.0" BorderPane.alignment="CENTER">
@@ -64,24 +69,30 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Label" />
-                        <Label text="Label" GridPane.rowIndex="1" />
-                        <Label text="Label" GridPane.rowIndex="2" />
-                        <Label text="Label" GridPane.rowIndex="3" />
-                        <Label text="Label" GridPane.rowIndex="4" />
-                        <Label text="Label" GridPane.rowIndex="5" />
+                        <Label fx:id="titleLabel" alignment="CENTER" text="Title" />
+                        <Label fx:id="authorLabel" alignment="CENTER" text="Author" GridPane.rowIndex="1" />
+                        <Label fx:id="editionLabel" alignment="CENTER" text="Edition" GridPane.rowIndex="2" />
+                        <Label fx:id="isbnLabel" alignment="CENTER" text="ISBN" GridPane.rowIndex="3" />
+                        <Label fx:id="publishLabel" alignment="CENTER" text="Published" GridPane.rowIndex="5" />
+                        <Label fx:id="bookTitleLabel" alignment="CENTER" GridPane.columnIndex="1" />
+                        <Label fx:id="bookAuthorLabel" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="bookEditionLabel" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="bookIsbnLabel" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="bookPublishLabel" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="bookPublisherLabel" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="publisherLabel" alignment="CENTER" text="Publisher" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="bookImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                </children>
             </VBox>
          </left>
          <center>
-            <ListView prefHeight="604.0" prefWidth="636.0" BorderPane.alignment="CENTER" />
+            <ListView fx:id="bookListView" prefHeight="604.0" prefWidth="636.0" BorderPane.alignment="CENTER" />
          </center>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

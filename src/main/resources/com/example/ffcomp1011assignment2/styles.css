@@ -1,0 +1,23 @@
+.root {
+    -fx-font-family: "Big Caslon";
+}
+
+#header{
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: grey;
+}
+
+.button{
+
+    -fx-font-szie: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #c4112d
+}
+
+.button:hover {
+    -fx-text-fill: #c4112d;
+    -fx-background-color: #ffffff;
+    -fx-cursor: hand;
+}
