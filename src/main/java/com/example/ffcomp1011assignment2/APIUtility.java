@@ -37,53 +37,62 @@ public class APIUtility {
         //https://openlibrary.org/books/OL26793280M.json
 
         // Creates json file with data from api.
-//        HttpResponse<Path> response = client.send(httpRequest, HttpResponse
-//                .BodyHandlers
-//                .ofFile(Paths.get("booksData.json"))
-//        );
+        HttpResponse<Path> response = client.send(httpRequest, HttpResponse
+                .BodyHandlers
+                .ofFile(Paths.get("booksData.json"))
+        );
 
-        HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+//        HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+//
+//        // Create a json object and map them to a class object.
+//
+//
+//        Gson gson = new Gson();
+//        JsonObject responseR = gson.fromJson(response.body(), JsonObject.class);
+//        JsonArray responseDocs = responseR.get("docs").getAsJsonArray();
+//        JsonObject responseX = responseDocs.get(0).getAsJsonObject();
+//        JsonArray responseSeed = responseX.get("seed").getAsJsonArray();
+//
+//        ArrayList<String> bookID = new ArrayList<>();
+//
+//        List seeds = responseSeed.asList();
+//
+//        for (var book : seeds) {
+//            if (book.toString().contains("/books/")) {
+//                bookID.add(book.toString().replaceAll("/books/", ""));
+//            }
+//        }
+//
+//        try{
+//            getBookDetails(bookID);
+//
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
 
-        // Create a json object and map them to a class object.
+    }
 
+    public static HttpResponse<String> getOLBookDetailByID(String bookID) throws IOException, InterruptedException{
 
-        Gson gson = new Gson();
-        JsonObject responseR = gson.fromJson(response.body(), JsonObject.class);
-        JsonArray responseDocs = responseR.get("docs").getAsJsonArray();
-        JsonObject responseX = responseDocs.get(0).getAsJsonObject();
-        JsonArray responseSeed = responseX.get("seed").getAsJsonArray();
+        HttpClient client = HttpClient.newHttpClient();
+        System.out.print(bookID);
 
-        ArrayList<String> bookID = new ArrayList<>();
+        String uri = String.format("https://openlibrary.org/books/OL9158246M.json");
+        // Create the https request builder
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(uri)).build();
+        return client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-        List seeds = responseSeed.asList();
+    }
 
-        for (var book : seeds) {
-            if (book.toString().contains("/books/")) {
-                bookID.add(book.toString().replaceAll("/books/", ""));
-            }
+    public static void getBookDetails(List books) throws IOException, InterruptedException{
+        ArrayList<Object> bookDetails = new ArrayList<>();
+
+        for(var book : books) {
+            HttpResponse<String> response = getOLBookDetailByID(book.toString());
+            bookDetails.add(response.body());
+            break;
         }
 
-        int counter = 0;
-
-        while (counter < 10) {
-            try{
-
-            } catch (Exception e){
-
-            }
-            finally {
-                counter++;
-            }
-        }
-
-
-
-        //System.out.print(gson.toJson(response.body())); // serializes target to Json
-
-
-//        ArrayList target2 = gson.fromJson(json, ArrayList.class); // deserializes json into target2
-//        System.out.println(target2);
-        //System.out.println(gson.fromJson(response.body(), ArrayList.class ));
-
+        System.out.println(bookDetails);
     }
 }
