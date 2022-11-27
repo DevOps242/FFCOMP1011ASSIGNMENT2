@@ -20,7 +20,7 @@ public class APIUtility {
 
 
 
-    public static void getBooksFromOLBySearch(String title) throws IOException, InterruptedException {
+    public static APIResponse getBooksFromOLBySearch(String title) throws IOException, InterruptedException {
 
         title = title.replaceAll(" ","%20");
 
@@ -36,25 +36,29 @@ public class APIUtility {
         //Get the individual book.
         //https://openlibrary.org/books/OL26793280M.json
 
-        // Creates json file with data from api.
-        HttpResponse<Path> response = client.send(httpRequest, HttpResponse
+         //Creates json file with data from api.
+        HttpResponse<Path> responseFile = client.send(httpRequest, HttpResponse
                 .BodyHandlers
                 .ofFile(Paths.get("booksData.json"))
         );
 
-//        HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-//
-//        // Create a json object and map them to a class object.
-//
-//
-//        Gson gson = new Gson();
+        HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+        // Create a json object and map them to a class object.
+        Gson gson = new Gson();
+
+        return gson.fromJson(response.body(), APIResponse.class);
+
+
 //        JsonObject responseR = gson.fromJson(response.body(), JsonObject.class);
 //        JsonArray responseDocs = responseR.get("docs").getAsJsonArray();
-//        JsonObject responseX = responseDocs.get(0).getAsJsonObject();
+////        JsonObject responseX = .getAsJsonObject();
+//
+//        return gson.fromJson(responseR, APIResponse.class);
 //        JsonArray responseSeed = responseX.get("seed").getAsJsonArray();
-//
+
 //        ArrayList<String> bookID = new ArrayList<>();
-//
+
 //        List seeds = responseSeed.asList();
 //
 //        for (var book : seeds) {
@@ -62,7 +66,7 @@ public class APIUtility {
 //                bookID.add(book.toString().replaceAll("/books/", ""));
 //            }
 //        }
-//
+
 //        try{
 //            getBookDetails(bookID);
 //

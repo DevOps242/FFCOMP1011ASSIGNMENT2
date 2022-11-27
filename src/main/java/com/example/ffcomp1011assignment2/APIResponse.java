@@ -3,11 +3,15 @@ package com.example.ffcomp1011assignment2;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class APIResponse {
+    @SerializedName("docs")
+    private Book[] docs;
 
-    @SerializedName("numfound")
-    private int numfound;
+    @SerializedName("numFound")
+    private int totalResults;
 
     @SerializedName("start")
     private int start;
@@ -15,47 +19,35 @@ public class APIResponse {
     @SerializedName("numFoundExact")
     private boolean numFoundExact;
 
-    @SerializedName("docs")
-    private ArrayList<String> docs;
-
-
-    public APIResponse(int numfound, int start, boolean numFoundExact, ArrayList docs) {
-        setNumfound(numfound);
-        setStart(start);
-        setNumFoundExact(numFoundExact);
+    public APIResponse(Book[] docs, int totalResults, boolean numFoundExact, int start) {
+        System.out.println(docs);
+        System.out.println(totalResults);
         setDocs(docs);
-    }
-
-
-    public int getNumfound() {
-        return numfound;
-    }
-
-    public void setNumfound(int numfound) {
-        this.numfound = numfound;
-    }
-
-    public int getStart() {
-        return start;
-    }
-
-    public void setStart(int start) {
-        this.start = start;
-    }
-
-    public boolean isNumFoundExact() {
-        return numFoundExact;
-    }
-
-    public void setNumFoundExact(boolean numFoundExact) {
+        setTotalResults(totalResults);
         this.numFoundExact = numFoundExact;
+        this.start = start;
+
     }
 
-    public ArrayList[] getDocs() {
-        return new ArrayList[]{docs};
+    public int getTotalResults() {
+        return totalResults;
     }
 
-    public void setDocs(ArrayList<String> docs) {
+    public void setTotalResults(int totalResults) {
+        this.totalResults = totalResults;
+    }
+
+    public Book[] getDocs() {
+        return docs;
+    }
+
+    public void setDocs(Book[] docs) {
         this.docs = docs;
     }
+
+    public List<Book> getBooks() {
+        return Arrays.asList(docs);
+    }
+
+
 }

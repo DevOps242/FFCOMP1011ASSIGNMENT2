@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ffcomp1011assignment2.LibraryViewController">
    <children>
       <BorderPane layoutX="47.0" layoutY="70.0" prefHeight="800.0" prefWidth="1000.0" stylesheets="@styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -25,7 +24,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="listenButton" mnemonicParsing="false" text="Listen to Book" />
-                  <Button fx:id="previewLabel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Preview Book" />
+                  <Button fx:id="previewButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Preview Book" />
                   <Button fx:id="purchaseBookButton" mnemonicParsing="false" text="Purchase Book" />
                </children>
                <BorderPane.margin>
@@ -42,10 +41,18 @@
                   <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="112.0" text="errors will go here" />
                   <HBox alignment="CENTER" prefHeight="59.0" prefWidth="200.0">
                      <children>
-                        <TextField alignment="CENTER" promptText="Search Books" />
+                        <TextField fx:id="searchTextField" alignment="CENTER" promptText="Search Books" />
                      </children>
                   </HBox>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#search" text="Search" />
+                  <Label fx:id="resultsLabel" alignment="CENTER">
+                     <padding>
+                        <Insets top="15.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </Label>
                </children>
                <padding>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
