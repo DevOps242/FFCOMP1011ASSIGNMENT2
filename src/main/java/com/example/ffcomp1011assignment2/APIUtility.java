@@ -99,4 +99,9 @@ public class APIUtility {
 
         System.out.println(bookDetails);
     }
+
+    public static String getBookImage(int imageID) {
+        return String.format("https://covers.openlibrary.org/b/id/%s-M.jpg", imageID);
+
+    }
 }

@@ -17,6 +17,10 @@ public class Book {
     @SerializedName("publisher")
     private ArrayList<String> publishers;
 
+
+    @SerializedName("author_name")
+    private ArrayList<String> author;
+
     @SerializedName("language")
     private ArrayList<String> language;
 
@@ -26,15 +30,40 @@ public class Book {
     @SerializedName("seed")
     private ArrayList<String> seeds;
 
-    public Book(String key, String title, int editionCount, ArrayList<String> publishDate, ArrayList<String> publishers, ArrayList<String> language, ArrayList<String> seeds) {
+    @SerializedName("cover_i")
+    private Integer imageID;
+
+    public Book(String key, String title, ArrayList<String> author, int editionCount, ArrayList<String> publishDate, ArrayList<String> publishers, ArrayList<String> language, ArrayList<String> seeds, Integer imageID) {
         setKey(key);
         setTitle(title);
+        setAuthor(author);
         setEditionCount(editionCount);
         setPublishDate(publishDate);
         setPublishers(publishers);
         setLanguage(language);
         setSeeds(seeds);
+        setImageID(imageID);
 
+    }
+
+    public Integer getImageID() {
+        return imageID;
+    }
+
+    public void setImageID(Integer imageID) {
+        this.imageID = imageID;
+    }
+
+    public ArrayList<String> getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(ArrayList<String> author) {
+        this.author = author;
+    }
+
+    public ArrayList<String> getLanguage() {
+        return language;
     }
 
     public void setTitle(String title) {
@@ -95,6 +124,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return String.format("Title: %s - Publisher: %s ", title, publishers.toString());
+        return String.format("Title: %s", title);
     }
 }

@@ -20,8 +20,6 @@ public class APIResponse {
     private boolean numFoundExact;
 
     public APIResponse(Book[] docs, int totalResults, boolean numFoundExact, int start) {
-        System.out.println(docs);
-        System.out.println(totalResults);
         setDocs(docs);
         setTotalResults(totalResults);
         this.numFoundExact = numFoundExact;
