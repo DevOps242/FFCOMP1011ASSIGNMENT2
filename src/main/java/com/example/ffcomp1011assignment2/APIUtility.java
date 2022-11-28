@@ -55,7 +55,7 @@ public class APIUtility {
     public static BookDetail getOLBookDetailByID(String bookKey) throws IOException, InterruptedException{
 
         bookKey = bookKey.replaceAll("/works/", "");
-        System.out.println(bookKey);
+
         String uri = String.format("https://openlibrary.org/books/%s.json", bookKey);
         HttpClient client = HttpClient.newHttpClient();
 
@@ -66,6 +66,7 @@ public class APIUtility {
 
 
         System.out.println(response.body());
+        System.out.println("book detailed API Utility done.");
         Gson gson = new Gson();
 
         return gson.fromJson(response.body(), BookDetail.class);
