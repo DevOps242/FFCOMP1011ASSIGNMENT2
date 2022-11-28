@@ -1,5 +1,7 @@
 package com.example.ffcomp1011assignment2;
 
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -8,13 +10,20 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+
 import java.util.*;
 
-public class LibraryViewController implements Initializable {
+public class LibraryViewController  implements Initializable {
+
+    @FXML
+    private VBox detailVBox;
 
     @FXML
     private Label authorLabel;
@@ -23,7 +32,7 @@ public class LibraryViewController implements Initializable {
     private Label bookAuthorLabel;
 
     @FXML
-    private Label bookEditionLabel;
+    private Label bookLanguageLabel;
 
     @FXML
     private ImageView bookImage;
@@ -47,7 +56,7 @@ public class LibraryViewController implements Initializable {
     private Label resultsLabel;
 
     @FXML
-    private Label editionLabel;
+    private Label languageLabel;
 
     @FXML
     private Label errorLabel;
@@ -78,49 +87,25 @@ public class LibraryViewController implements Initializable {
 
     private void showLabels(boolean show){
         if (show) {
-            bookTitleLabel.setVisible(true);
-            bookAuthorLabel.setVisible(true);
-            bookEditionLabel.setVisible(true);
-            bookIsbnLabel.setVisible(true);
-            bookPublisherLabel.setVisible(true);
-            bookPublishLabel.setVisible(true);
+
+            detailVBox.setVisible(true);
             bookListView.setVisible(true);
-
-            titleLabel.setVisible(true);
-            authorLabel.setVisible(true);
-            editionLabel.setVisible(true);
-            isbnLabel.setVisible(true);
-            publisherLabel.setVisible(true);
-            publishLabel.setVisible(true);
-
             listenButton.setVisible(true);
             purchaseBookButton.setVisible(true);
             previewButton.setVisible(true);
 
         } else {
-            bookTitleLabel.setVisible(false);
-            bookAuthorLabel.setVisible(false);
-            bookEditionLabel.setVisible(false);
-            bookIsbnLabel.setVisible(false);
-            bookPublisherLabel.setVisible(false);
-            bookPublishLabel.setVisible(false);
+            detailVBox.setVisible(false);
+            previewButton.setVisible(false);
             bookListView.setVisible(false);
-
-            titleLabel.setVisible(false);
-            authorLabel.setVisible(false);
-            editionLabel.setVisible(false);
-            isbnLabel.setVisible(false);
-            publisherLabel.setVisible(false);
-            publishLabel.setVisible(false);
-
             listenButton.setVisible(false);
             purchaseBookButton.setVisible(false);
-            previewButton.setVisible(false);
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         showLabels(false);
         errorLabel.setVisible(false);
         bookImage.setVisible(false);
@@ -128,38 +113,39 @@ public class LibraryViewController implements Initializable {
         bookListView.getSelectionModel().selectedItemProperty().addListener((observableValue, book, bookSelected) -> {
             if (bookSelected != null){
                 showLabels(true);
-                titleLabel.setText(bookSelected.getTitle());
+                bookTitleLabel.setText(bookSelected.getTitle());
 
                 // Validate that the fields are there.
                 if (bookSelected.getAuthor() != null)
-                    authorLabel.setText(bookSelected.getAuthor().toString());
+                    bookAuthorLabel.setText(bookSelected.getAuthor().toString());
                 else
-                    authorLabel.setText("N/A");
+                    bookAuthorLabel.setText("N/A");
+
+                if (bookSelected.getLanguage() != null)
+                    bookLanguageLabel.setText(bookSelected.getLanguage().toString());
+                else
+                    bookLanguageLabel.setText("N/A");
 
 //                editionLabel.setText(bookSelected.);
 //                isbnLabel.setText(bookSelected);
 
                 if (bookSelected.getPublishers() != null)
-                    publisherLabel.setText(bookSelected.getPublishers().toString());
+                    bookPublisherLabel.setText(bookSelected.getPublishers().toString());
                 else
-                    publisherLabel.setText("N/A");
+                    bookPublisherLabel.setText("N/A");
 
                 if (bookSelected.isPublishDate() != null)
-                    publishLabel.setText(bookSelected.isPublishDate().toString());
+                    bookPublishLabel.setText(bookSelected.isPublishDate().toString());
                 else
-                    publishLabel.setText("N/A");
-
-
+                    bookPublishLabel.setText("N/A");
 
                     Thread fetchBookImageThread = new Thread(new Runnable() {
                         @Override
                         public void run() {
                             try {
-                                System.out.println("Thread Started");
                                 if (bookSelected.getImageID() != null) {
 //                                bookImage.setImage(new Image("https://ia802701.us.archive.org/view_archive.php?archive=/29/items/olcovers123/olcovers123-L.zip&file=1239523-L.jpg"));
 //                                bookImage.setImage(new Image("https://m.media-amazon.com/images/M/MV5BZmRiZDlhMWEtOGIzZi00NGVjLTg3NmYtYmQ2YjgzYjMwOWZjXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg"));
-
 
                                     // Section take from https://stackoverflow.com/questions/55075985/javafx-image-url-not-loading
                                     // to resolve the issue of my image not loading from the openlibrary.org domain
@@ -169,7 +155,6 @@ public class LibraryViewController implements Initializable {
                                         connection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
                                         Image image = new Image(connection.getInputStream());
                                         bookImage.setImage(image);
-                                        System.out.println(APIUtility.getBookImage(bookSelected.getImageID()));
                                     } catch(Exception e){
                                         bookImage.setImage(new Image(APIUtility.getBookImage(bookSelected.getImageID())));
                                     }
@@ -178,13 +163,14 @@ public class LibraryViewController implements Initializable {
                                     bookImage.setImage(new Image(Main.class.getResourceAsStream("images/bookDefault.png")));
                                 }
                                 bookImage.setVisible(true);
-                                System.out.println("Thread Ended");
                             } catch(IllegalArgumentException e) {
                                 e.printStackTrace();
                             }
                         }
                     });
                     fetchBookImageThread.start();
+
+
             } else {
                     errorLabel.setVisible(true);
                     errorLabel.setText("Book is unavailable.");
@@ -227,5 +213,32 @@ public class LibraryViewController implements Initializable {
             errorLabel.setVisible(true);
             bookListView.getItems().clear();
         }
+    }
+
+    @FXML
+    public void listenBook() {
+
+    }
+
+    @FXML
+    public void previewBookWeb() throws URISyntaxException, IOException{
+//        // Reference - https://www.geekyhacker.com/2021/11/18/open-a-url-in-the-default-browser-in-java/
+//        String bookUrl = "https://openlibrary.org/"+bookWork;
+
+    }
+
+    @FXML
+    public void purchaseBook() {
+        String yahooURL = "http://www.java2s.com";
+    }
+
+    /**
+     * Load additional information for the book clicked.
+     *
+     */
+    @FXML
+    private void getDetails(ActionEvent event) throws IOException, InterruptedException {
+        Book book = bookListView.getSelectionModel().getSelectedItem();
+        SceneChanger.changeScenes(event, "details-view.fxml", book.getKey());
     }
 }

@@ -50,58 +50,33 @@ public class APIUtility {
         return gson.fromJson(response.body(), APIResponse.class);
 
 
-//        JsonObject responseR = gson.fromJson(response.body(), JsonObject.class);
-//        JsonArray responseDocs = responseR.get("docs").getAsJsonArray();
-////        JsonObject responseX = .getAsJsonObject();
-//
-//        return gson.fromJson(responseR, APIResponse.class);
-//        JsonArray responseSeed = responseX.get("seed").getAsJsonArray();
-
-//        ArrayList<String> bookID = new ArrayList<>();
-
-//        List seeds = responseSeed.asList();
-//
-//        for (var book : seeds) {
-//            if (book.toString().contains("/books/")) {
-//                bookID.add(book.toString().replaceAll("/books/", ""));
-//            }
-//        }
-
-//        try{
-//            getBookDetails(bookID);
-//
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-
     }
 
-    public static HttpResponse<String> getOLBookDetailByID(String bookID) throws IOException, InterruptedException{
+    public static BookDetail getOLBookDetailByID(String bookID) throws IOException, InterruptedException{
 
+        String uri = String.format("https://openlibrary.org/books/%s.json", bookID);
         HttpClient client = HttpClient.newHttpClient();
-        System.out.print(bookID);
 
-        String uri = String.format("https://openlibrary.org/books/OL9158246M.json");
         // Create the https request builder
         HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(uri)).build();
-        return client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+        HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+        Gson gson = new Gson();
+        return gson.fromJson(response.body(), BookDetail.class);
 
     }
 
     public static void getBookDetails(List books) throws IOException, InterruptedException{
         ArrayList<Object> bookDetails = new ArrayList<>();
 
-        for(var book : books) {
-            HttpResponse<String> response = getOLBookDetailByID(book.toString());
-            bookDetails.add(response.body());
-            break;
-        }
+//        for(var book : books) {
+//           // HttpResponse<String> response = getOLBookDetailByID(book.toString());
+//            bookDetails.add(response.body());
+//            break;
+//        }
 
         System.out.println(bookDetails);
     }
 
-    public static String getBookImage(int imageID) {
-        return String.format("https://covers.openlibrary.org/b/id/%s-M.jpg", imageID);
-
-    }
 }

@@ -14,12 +14,13 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Barrie Library");
         stage.setScene(scene);
+
         stage.show();
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        APIUtility.getBooksFromOLBySearch("Python Books");
+//        APIUtility.getBooksFromOLBySearch("Python Books");
 
         launch();
     }
