@@ -11,13 +11,13 @@ import java.io.IOException;
 public class SceneChanger {
 
 
-    public static void changeScenes(ActionEvent event, String fxmlFile, String bookWork) throws IOException, InterruptedException {
+    public static void changeScenes(ActionEvent event, String fxmlFile, Book book) throws IOException, InterruptedException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxmlFile));
         Scene scene = new Scene(fxmlLoader.load());
 
         // Grab the controller from the next scene
         DetailsViewController controller = fxmlLoader.getController();
-        controller.getBookDetails(bookWork);
+        controller.getBookDetails(book);
 
         // get the stage from the ActionEvent
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

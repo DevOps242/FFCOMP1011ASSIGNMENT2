@@ -1,15 +1,14 @@
 package com.example.ffcomp1011assignment2;
 
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 
@@ -26,9 +25,6 @@ public class LibraryViewController  implements Initializable {
     private VBox detailVBox;
 
     @FXML
-    private Label authorLabel;
-
-    @FXML
     private Label bookAuthorLabel;
 
     @FXML
@@ -38,16 +34,10 @@ public class LibraryViewController  implements Initializable {
     private ImageView bookImage;
 
     @FXML
-    private Label bookIsbnLabel;
-
-    @FXML
     private ListView<Book> bookListView;
 
     @FXML
-    private Label bookPublishLabel;
-
-    @FXML
-    private Label bookPublisherLabel;
+    private Label bookSubjectLabel;
 
     @FXML
     private Label bookTitleLabel;
@@ -55,8 +45,6 @@ public class LibraryViewController  implements Initializable {
     @FXML
     private Label resultsLabel;
 
-    @FXML
-    private Label languageLabel;
 
     @FXML
     private Label errorLabel;
@@ -65,25 +53,26 @@ public class LibraryViewController  implements Initializable {
     private TextField searchTextField;
 
     @FXML
-    private Label isbnLabel;
-
-    @FXML
     private Button listenButton;
 
     @FXML
     private Button previewButton;
 
-    @FXML
-    private Label publishLabel;
 
     @FXML
-    private Label publisherLabel;
+    private ListView<String> bookPublisherListView;
 
     @FXML
     private Button purchaseBookButton;
 
     @FXML
-    private Label titleLabel;
+    private ProgressIndicator progressIndicator;
+
+    @FXML
+    private BorderPane libraryContainer;
+
+    @FXML
+    private  BorderPane loadingContainer;
 
     private void showLabels(boolean show){
         if (show) {
@@ -103,14 +92,24 @@ public class LibraryViewController  implements Initializable {
         }
     }
 
+    private void clearFields(){
+        bookPublisherListView.getItems().clear();
+        bookLanguageLabel.setText(null);
+        bookTitleLabel.setText(null);
+        bookAuthorLabel.setText(null);
+        bookSubjectLabel.setText(null);
+        bookImage.setImage(null);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        loadingContainer.setVisible(false);
         showLabels(false);
         errorLabel.setVisible(false);
         bookImage.setVisible(false);
         resultsLabel.setVisible (false);
         bookListView.getSelectionModel().selectedItemProperty().addListener((observableValue, book, bookSelected) -> {
+            bookPublisherListView.getItems().clear();
             if (bookSelected != null){
                 showLabels(true);
                 bookTitleLabel.setText(bookSelected.getTitle());
@@ -130,14 +129,10 @@ public class LibraryViewController  implements Initializable {
 //                isbnLabel.setText(bookSelected);
 
                 if (bookSelected.getPublishers() != null)
-                    bookPublisherLabel.setText(bookSelected.getPublishers().toString());
-                else
-                    bookPublisherLabel.setText("N/A");
+                    bookPublisherListView.getItems().addAll(bookSelected.getPublishers());
 
-                if (bookSelected.isPublishDate() != null)
-                    bookPublishLabel.setText(bookSelected.isPublishDate().toString());
-                else
-                    bookPublishLabel.setText("N/A");
+                if (bookSelected.getSubject() != null)
+                    bookSubjectLabel.setText(bookSelected.getSubject());
 
                     Thread fetchBookImageThread = new Thread(new Runnable() {
                         @Override
@@ -185,34 +180,93 @@ public class LibraryViewController  implements Initializable {
      */
     @FXML
     private void search() throws IOException, InterruptedException {
-        APIResponse apiResponse = APIUtility.getBooksFromOLBySearch(searchTextField.getText());
+        detailVBox.setVisible(false);
+        libraryContainer.setVisible(false);
+        loadingContainer.setVisible(true);
+        bookListView.getItems().clear();
+        Thread fireLoaderThread  = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                double progress = 0;
+                //                progressIndicator.setVisible(true);
 
-        if(apiResponse.getTotalResults() > 0) {
-            // Load the list
-            bookListView.getItems().clear();
-            resultsLabel.setVisible(true);
-            bookListView.setVisible(true);
+                try {
+                    APIResponse apiResponse = APIUtility.getBooksFromOLBySearch(searchTextField.getText());
+                    if(apiResponse.getTotalResults() > 0) {
+                        // Load the list
 
-            errorLabel.setVisible(false);
-            List<Book> books = apiResponse.getBooks();
+                        resultsLabel.setVisible(true);
+                        bookListView.setVisible(true);
+                        errorLabel.setVisible(false);
+                        List<Book> books = apiResponse.getBooks();
 //            Collections.sort(books, new Comparator<Book>() {
 //                @Override
 //                public int compare(Book o1, Book o2) {
 //                    return 0;
 //                }
 //            });
-            resultsLabel.setText("Result Found: " + books.size());
-            bookListView.getItems().addAll(books);
+                        for (int i = 0; i<=10; i++) {
+                            try{
+                                Thread.sleep(100);
+                            } catch (InterruptedException e){
+                                e.printStackTrace();
+                            }
+                            progress += 0.1;
+                            // to pass information in the Javafx thread, it cannot be a variable
+                            //object
+
+                            // This creates a Thread that can run on the JavaFX platform
+                            // once the JavaFX thread has capacity to take it on
+                            // runLater() is like calling start() on a thread
+                            final double reportedProgress = progress;
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressIndicator.setProgress(reportedProgress);
+                                    // System.out.println(movieSelected.getPoster());
+                                    // if the progress report is
+                                    if(reportedProgress >= 1 ){
+                                        try{
+                                            libraryContainer.setVisible(true);
+                                            loadingContainer.setVisible(false);
+                                            bookListView.getItems().addAll(books);
+                                            if (bookListView.getItems().size() > 0)
+                                                resultsLabel.setText("Result Found: " + books.size());
+                                            progressIndicator.setProgress(0);
+
+                                        } catch(IllegalArgumentException e) {
+                                            libraryContainer.setVisible(true);
+                                            loadingContainer.setVisible(false);
+                                            errorLabel.setText(e.toString());
+                                            progressIndicator.setProgress(0);
+                                        }
+                                    }
+                                }
+                            });
+                        }
 
 
-        } else {
-            // Show error message
-            resultsLabel.setText("Results Found: 0");
-            errorLabel.setText("There was an error, searching your book title.");
-            resultsLabel.setVisible(true);
-            errorLabel.setVisible(true);
-            bookListView.getItems().clear();
-        }
+
+                    } else {
+                        // Show error message
+                        resultsLabel.setText("Results Found: 0");
+                        errorLabel.setText("There was an error, searching your book title.");
+                        resultsLabel.setVisible(true);
+                        errorLabel.setVisible(true);
+                        bookListView.getItems().clear();
+                    }
+
+                } catch(InterruptedException | IOException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        fireLoaderThread.start();
+
+
+
     }
 
     @FXML
@@ -239,6 +293,6 @@ public class LibraryViewController  implements Initializable {
     @FXML
     private void getDetails(ActionEvent event) throws IOException, InterruptedException {
         Book book = bookListView.getSelectionModel().getSelectedItem();
-        SceneChanger.changeScenes(event, "details-view.fxml", book.getKey());
+        SceneChanger.changeScenes(event, "details-view.fxml", book);
     }
 }

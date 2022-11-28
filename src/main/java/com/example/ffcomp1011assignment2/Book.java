@@ -2,7 +2,9 @@ package com.example.ffcomp1011assignment2;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Book {
     @SerializedName("title")
@@ -11,8 +13,8 @@ public class Book {
     @SerializedName("edition_count")
     private int editionCount;
 
-    @SerializedName("publish_date")
-    private ArrayList<String> publishDate;
+    @SerializedName("subject_facet")
+    private ArrayList<String> subject;
 
     @SerializedName("publisher")
     private ArrayList<String> publishers;
@@ -33,12 +35,12 @@ public class Book {
     @SerializedName("cover_i")
     private Integer imageID;
 
-    public Book(String key, String title, ArrayList<String> author, int editionCount, ArrayList<String> publishDate, ArrayList<String> publishers, ArrayList<String> language, ArrayList<String> seeds, Integer imageID) {
+    public Book(String key, String title, ArrayList<String> author, int editionCount, ArrayList<String> subject, ArrayList<String> publishers, ArrayList<String> language, ArrayList<String> seeds, Integer imageID) {
         setKey(key);
         setTitle(title);
         setAuthor(author);
         setEditionCount(editionCount);
-        setPublishDate(publishDate);
+        setSubject(subject);
         setPublishers(publishers);
         setLanguage(language);
         setSeeds(seeds);
@@ -54,16 +56,39 @@ public class Book {
         this.imageID = imageID;
     }
 
-    public ArrayList<String> getAuthor() {
-        return author;
+    public String getAuthor() {
+        if ( author != null){
+            if (author.size() > 0){
+                return Arrays.toString(author.toArray()).replace("[", "").replace("]", "");
+
+            } else {
+                return "N/A";
+            }
+        } else {
+            return "N/A";
+        }
     }
 
     public void setAuthor(ArrayList<String> author) {
         this.author = author;
     }
 
-    public ArrayList<String> getLanguage() {
-        return language;
+    public String getLanguage() {
+        if ( language != null){
+            if (language.size() > 0){
+                ArrayList<String> languageTransform  = new ArrayList<>();
+                for (var text : language) {
+                    text = text.substring(0,1).toUpperCase() + text.substring(1);
+                    languageTransform.add(text);
+                }
+                return Arrays.toString(languageTransform.toArray()).replace("[", "").replace("]", "");
+            } else {
+                return "N/A";
+            }
+        } else {
+            return "N/A";
+        }
+
     }
 
     public void setTitle(String title) {
@@ -74,8 +99,8 @@ public class Book {
         this.editionCount = editionCount;
     }
 
-    public void setPublishDate(ArrayList<String> publishDate) {
-        this.publishDate = publishDate;
+    public void setSubject(ArrayList<String> subject) {
+        this.subject = subject;
     }
 
     public void setPublishers(ArrayList<String> publishers) {
@@ -102,17 +127,20 @@ public class Book {
         return editionCount;
     }
 
-    public ArrayList<String> isPublishDate() {
-        return publishDate;
+    public String getSubject() {
+        if ( subject != null)
+            if (subject.size() > 0)
+                return subject.get(0);
+            else
+                return "N/A";
+        else
+            return "N/A";
     }
 
     public ArrayList<String> getPublishers() {
         return publishers;
     }
 
-    public ArrayList<String> isLanguage() {
-        return language;
-    }
 
     public String getKey() {
         return key;

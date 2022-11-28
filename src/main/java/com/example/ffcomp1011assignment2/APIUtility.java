@@ -52,9 +52,11 @@ public class APIUtility {
 
     }
 
-    public static BookDetail getOLBookDetailByID(String bookID) throws IOException, InterruptedException{
+    public static BookDetail getOLBookDetailByID(String bookKey) throws IOException, InterruptedException{
 
-        String uri = String.format("https://openlibrary.org/books/%s.json", bookID);
+        bookKey = bookKey.replaceAll("/works/", "");
+        System.out.println(bookKey);
+        String uri = String.format("https://openlibrary.org/books/%s.json", bookKey);
         HttpClient client = HttpClient.newHttpClient();
 
         // Create the https request builder
@@ -62,7 +64,10 @@ public class APIUtility {
 
         HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
+
+        System.out.println(response.body());
         Gson gson = new Gson();
+
         return gson.fromJson(response.body(), BookDetail.class);
 
     }
@@ -79,4 +84,7 @@ public class APIUtility {
         System.out.println(bookDetails);
     }
 
+    public static String getBookImage(Integer imageID) {
+        return String.format("https://covers.openlibrary.org/b/id/%s-L.jpg", imageID);
+    }
 }

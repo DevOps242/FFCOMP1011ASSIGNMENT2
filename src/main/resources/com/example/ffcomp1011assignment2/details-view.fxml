@@ -1,14 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.ffcomp1011assignment2.DetailsViewController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ffcomp1011assignment2.DetailsViewController">
+   <children>
+      <BorderPane fx:id="rootContainer" layoutX="190.0" layoutY="221.0" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" text="Return to Search" />
+               </children>
+            </HBox>
+         </bottom>
+         <top>
+            <VBox alignment="CENTER" prefHeight="92.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="More Details" />
+               </children>
+            </VBox>
+         </top>
+         <center>
+            <HBox prefHeight="593.0" prefWidth="610.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="593.0" prefWidth="204.0">
+                     <children>
+                        <ImageView fx:id="bookImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <VBox alignment="CENTER" prefHeight="169.0" prefWidth="200.0" spacing="25.0">
+                           <children>
+                              <Hyperlink fx:id="previewLink" text="Hyperlink" />
+                              <Hyperlink fx:id="listenLink" text="Hyperlink" />
+                              <Hyperlink text="Hyperlink" />
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="593.0" prefWidth="388.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label id="headingBookTitle" fx:id="bookTitle" alignment="CENTER" text="Label">
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label fx:id="bookAuthor" text="Label">
+                                       <padding>
+                                          <Insets left="2.0" />
+                                       </padding>
+                                       <VBox.margin>
+                                          <Insets left="2.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <GridPane prefHeight="60.0" prefWidth="378.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                        <MenuBar>
+                          <menus>
+                            <Menu mnemonicParsing="false" text="File">
+                              <items>
+                                <MenuItem mnemonicParsing="false" text="Close" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Edit">
+                              <items>
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Help">
+                              <items>
+                                <MenuItem mnemonicParsing="false" text="About" />
+                              </items>
+                            </Menu>
+                          </menus>
+                        </MenuBar>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
+         <right>
+            <VBox prefHeight="593.0" prefWidth="299.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+         </right>
+         <left>
+            <VBox prefHeight="593.0" prefWidth="323.0" BorderPane.alignment="CENTER" />
+         </left>
+      </BorderPane>
+   </children>
 </AnchorPane>
