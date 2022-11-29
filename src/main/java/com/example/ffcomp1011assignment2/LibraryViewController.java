@@ -3,6 +3,7 @@ package com.example.ffcomp1011assignment2;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -352,20 +353,37 @@ public class LibraryViewController  implements Initializable {
     }
 
     @FXML
-    public void listenBook() {
+    public void listenBook(ActionEvent event) {
+        loadComingSoon(event);
+    }
+
+    @FXML
+    public void previewBookWeb(ActionEvent event){
+        // create a alert
+        Alert a = new Alert(Alert.AlertType.NONE);
+        EventHandler<ActionEvent> newEvent = new
+                EventHandler<ActionEvent>() {
+                    public void handle(ActionEvent e)
+                    {
+                        // set alert type
+                        a.setAlertType(Alert.AlertType.WARNING);
+
+                        // show the dialog
+                        a.show();
+                    }
+                };
+        System.out.println("Coming Soon");
 
     }
 
     @FXML
-    public void previewBookWeb() throws URISyntaxException, IOException{
-//        // Reference - https://www.geekyhacker.com/2021/11/18/open-a-url-in-the-default-browser-in-java/
-//        String bookUrl = "https://openlibrary.org/"+bookWork;
-
+    public void purchaseBook(ActionEvent event) {
+        loadComingSoon(event);
     }
 
-    @FXML
-    public void purchaseBook() {
-        String yahooURL = "http://www.java2s.com";
+
+    public void loadComingSoon(ActionEvent event){
+
     }
 
     /**

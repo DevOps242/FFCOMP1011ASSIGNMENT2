@@ -239,7 +239,7 @@ public class DetailsViewController {
             }
         });
 
-        // Start the thread to fetch the poster.
+        // Start the thread to fetch the book.
         fetchRelatedBooks.start();
     }
 
