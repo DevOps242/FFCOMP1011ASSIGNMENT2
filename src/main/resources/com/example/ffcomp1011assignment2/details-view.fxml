@@ -155,7 +155,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label prefHeight="19.0" prefWidth="130.0" text="API Credits">
+                        <Label prefHeight="19.0" prefWidth="130.0" text="API Credits" underline="true">
                            <font>
                               <Font size="25.0" />
                            </font>

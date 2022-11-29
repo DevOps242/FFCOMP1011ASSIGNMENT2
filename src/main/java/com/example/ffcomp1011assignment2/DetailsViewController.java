@@ -213,12 +213,11 @@ public class DetailsViewController {
                                                 loadImage(relatedBookImage2, relatedBooks.get(1).getImageUri().get(0));
                                             } else
                                                 relatedBookImage2.setImage(new Image(Main.class.getResourceAsStream("images/bookDefault.png")));
-
-                                            loaderContainer.setVisible(false);
                                         } else {
                                             relatedBookLabel2.setVisible(false);
                                             relatedBookImage2.setVisible(false);
                                         }
+                                        loaderContainer.setVisible(false);
                                     } else {
                                         relatedBookLabel1.setVisible(false);
                                         relatedBookImage1.setVisible(false);

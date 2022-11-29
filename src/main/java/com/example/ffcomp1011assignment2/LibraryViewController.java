@@ -97,10 +97,10 @@ public class LibraryViewController  implements Initializable {
 
         } else {
             detailVBox.setVisible(false);
-            previewButton.setVisible(false);
             bookListView.setVisible(false);
             listenButton.setVisible(false);
             purchaseBookButton.setVisible(false);
+            previewButton.setVisible(false);
         }
     }
 
@@ -291,18 +291,56 @@ public class LibraryViewController  implements Initializable {
                                             loadingContainer.setVisible(false);
                                             errorLabel.setText(e.toString());
                                             progressIndicator.setProgress(0);
+                                            // Show error message
+                                            resultsLabel.setText("Results Found: 0");
+                                            errorLabel.setText("There was an error, searching your book title.");
+                                            resultsLabel.setVisible(true);
+                                            errorLabel.setVisible(true);
+                                            bookListView.getItems().clear();
                                         }
                                     }
                                 }
                             });
                         }
                     } else {
-                        // Show error message
-                        resultsLabel.setText("Results Found: 0");
-                        errorLabel.setText("There was an error, searching your book title.");
-                        resultsLabel.setVisible(true);
-                        errorLabel.setVisible(true);
-                        bookListView.getItems().clear();
+
+                        for (int i = 0; i<=10; i++) {
+                            try{
+                                Thread.sleep(100);
+                            } catch (InterruptedException e){
+                                e.printStackTrace();
+                            }
+                            progress += 0.1;
+
+                            final double reportedProgress = progress;
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressIndicator.setProgress(reportedProgress);
+
+                                    // if the progress report is
+                                    if(reportedProgress >= 1 ){
+                                        try{
+
+                                            bookListView.setVisible(false);
+                                            bookListView.getItems().clear();
+                                            libraryContainer.setVisible(true);
+                                            loadingContainer.setVisible(false);
+                                            progressIndicator.setProgress(0);
+                                            // Show error message
+                                            resultsLabel.setText("Results Found: 0");
+                                            errorLabel.setText("There was an error, searching your book title.");
+                                            resultsLabel.setVisible(true);
+                                            errorLabel.setVisible(true);
+                                            showLabels(false);
+
+                                        } catch(IllegalArgumentException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            });
+                        }
                     }
                 } catch(InterruptedException | IOException e) {
                     e.printStackTrace();
