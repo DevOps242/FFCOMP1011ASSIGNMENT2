@@ -57,7 +57,6 @@
 .circleindicator-message{
     -fx-font-size: 60px;
     -fx-font-weight: bold;
-
 }
 
 .circleindicator-container  {
@@ -68,6 +67,18 @@
 .circleindicator-container > .circleindicator-label {
     -fx-font-weight: bold;
     -fx-font-size: 4em;
+    -fx-text-fill: circleindicator-color;
+    -fx-padding: 5.0;
+}
+
+.circleindicator-message-mini{
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.circleindicator-container-mini > .circleindicator-label-mini {
+    -fx-font-weight: bold;
+    -fx-font-size: 2em;
     -fx-text-fill: circleindicator-color;
     -fx-padding: 5.0;
 }

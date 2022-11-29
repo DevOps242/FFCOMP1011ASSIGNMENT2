@@ -125,9 +125,6 @@ public class LibraryViewController  implements Initializable {
                 else
                     bookLanguageLabel.setText("N/A");
 
-//                editionLabel.setText(bookSelected.);
-//                isbnLabel.setText(bookSelected);
-
                 if (bookSelected.getPublishers() != null)
                     bookPublisherListView.getItems().addAll(bookSelected.getPublishers());
 
@@ -194,17 +191,11 @@ public class LibraryViewController  implements Initializable {
                     APIResponse apiResponse = APIUtility.getBooksFromOLBySearch(searchTextField.getText());
                     if(apiResponse.getTotalResults() > 0) {
                         // Load the list
-
                         resultsLabel.setVisible(true);
                         bookListView.setVisible(true);
                         errorLabel.setVisible(false);
                         List<Book> books = apiResponse.getBooks();
-//            Collections.sort(books, new Comparator<Book>() {
-//                @Override
-//                public int compare(Book o1, Book o2) {
-//                    return 0;
-//                }
-//            });
+
                         for (int i = 0; i<=10; i++) {
                             try{
                                 Thread.sleep(100);
@@ -212,18 +203,13 @@ public class LibraryViewController  implements Initializable {
                                 e.printStackTrace();
                             }
                             progress += 0.1;
-                            // to pass information in the Javafx thread, it cannot be a variable
-                            //object
 
-                            // This creates a Thread that can run on the JavaFX platform
-                            // once the JavaFX thread has capacity to take it on
-                            // runLater() is like calling start() on a thread
                             final double reportedProgress = progress;
                             Platform.runLater(new Runnable() {
                                 @Override
                                 public void run() {
                                     progressIndicator.setProgress(reportedProgress);
-                                    // System.out.println(movieSelected.getPoster());
+
                                     // if the progress report is
                                     if(reportedProgress >= 1 ){
                                         try{
@@ -244,9 +230,6 @@ public class LibraryViewController  implements Initializable {
                                 }
                             });
                         }
-
-
-
                     } else {
                         // Show error message
                         resultsLabel.setText("Results Found: 0");
@@ -255,18 +238,13 @@ public class LibraryViewController  implements Initializable {
                         errorLabel.setVisible(true);
                         bookListView.getItems().clear();
                     }
-
                 } catch(InterruptedException | IOException e) {
                     e.printStackTrace();
                     throw new RuntimeException(e);
                 }
             }
         });
-
         fireLoaderThread.start();
-
-
-
     }
 
     @FXML
@@ -287,7 +265,7 @@ public class LibraryViewController  implements Initializable {
     }
 
     /**
-     * Load additional information for the book clicked.
+     * Load additional information for the book clicked on a new scence.
      *
      */
     @FXML

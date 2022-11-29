@@ -21,7 +21,7 @@ public class Main extends Application {
     public static void main(String[] args) throws IOException, InterruptedException {
 
 //        APIUtility.getBooksFromOLBySearch("Python Books");
-
+//        APIUtility.getOLBookDetailByID("OL8051731M");
         launch();
     }
 }

@@ -2,7 +2,6 @@ package com.example.ffcomp1011assignment2;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
