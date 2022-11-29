@@ -5,6 +5,7 @@ module com.example.ffcomp1011assignment2 {
     requires com.google.gson;
 
 
+
     opens com.example.ffcomp1011assignment2 to javafx.fxml, com.google.gson;
     exports com.example.ffcomp1011assignment2;
 }

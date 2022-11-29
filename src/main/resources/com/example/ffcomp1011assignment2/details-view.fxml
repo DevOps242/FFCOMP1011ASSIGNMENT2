@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" styleClass="container" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ffcomp1011assignment2.DetailsViewController">
@@ -27,21 +28,29 @@
          <top>
             <VBox alignment="CENTER" prefHeight="92.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label id="header" text="More Details" />
+                  <Label id="header" text="More Details">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
                </children>
             </VBox>
          </top>
          <center>
-            <HBox prefHeight="608.0" prefWidth="623.0" spacing="25.0" BorderPane.alignment="CENTER">
+            <HBox id="cardBackground" prefHeight="608.0" prefWidth="545.0" spacing="25.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="593.0" prefWidth="204.0">
+                  <VBox prefHeight="604.0" prefWidth="199.0">
                      <children>
-                        <ImageView fx:id="bookImage" fitHeight="264.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="bookImage" fitHeight="264.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets left="15.0" top="15.0" />
+                           </VBox.margin>
+                        </ImageView>
                         <VBox alignment="CENTER" prefHeight="169.0" prefWidth="200.0" spacing="25.0">
                            <children>
-                              <Hyperlink fx:id="previewLink" text="Hyperlink" />
-                              <Hyperlink fx:id="listenLink" text="Hyperlink" />
-                              <Hyperlink text="Hyperlink" />
+                              <Hyperlink fx:id="previewLink" prefHeight="39.0" prefWidth="215.0" text="Hyperlink" textOverrun="CLIP" wrapText="true" />
+                              <Hyperlink fx:id="listenLink" prefHeight="40.0" prefWidth="215.0" text="Hyperlink" textOverrun="CLIP" wrapText="true" />
+                              <Hyperlink fx:id="purchaseLink" prefHeight="42.0" prefWidth="215.0" text="Hyperlink" textOverrun="CLIP" wrapText="true" />
                            </children>
                            <VBox.margin>
                               <Insets top="20.0" />
@@ -49,13 +58,13 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="593.0" prefWidth="388.0">
+                  <VBox prefHeight="604.0" prefWidth="303.0">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="145.0" prefWidth="357.0">
                            <children>
-                              <VBox prefHeight="100.0" prefWidth="395.0">
+                              <VBox prefHeight="115.0" prefWidth="357.0">
                                  <children>
-                                    <Label id="headingBookTitle" fx:id="bookTitle" prefHeight="40.0" prefWidth="357.0" text="Label" textOverrun="CLIP" wrapText="true">
+                                    <Label id="headingBookTitle" fx:id="bookTitle" prefHeight="67.0" prefWidth="286.0" text="Label" textOverrun="CLIP" wrapText="true">
                                        <padding>
                                           <Insets top="10.0" />
                                        </padding>
@@ -63,7 +72,7 @@
                                           <Insets />
                                        </VBox.margin>
                                     </Label>
-                                    <Label fx:id="bookAuthor" prefHeight="19.0" prefWidth="352.0" text="Label" textOverrun="CLIP" wrapText="true">
+                                    <Label fx:id="bookAuthor" prefHeight="53.0" prefWidth="284.0" text="Label" textOverrun="CLIP" wrapText="true">
                                        <padding>
                                           <Insets left="2.0" />
                                        </padding>
@@ -75,19 +84,19 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <GridPane prefHeight="60.0" prefWidth="378.0">
+                        <GridPane prefHeight="117.0" prefWidth="303.0">
                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="10.0" prefWidth="94.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="76.0" minWidth="10.0" prefWidth="76.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.0" minWidth="10.0" prefWidth="76.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.0" minWidth="10.0" prefWidth="62.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="81.0" minHeight="7.0" prefHeight="80.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="96.0" text="Publish Date" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="90.0" text="Publish Date" />
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="91.0" text="Publisher" GridPane.columnIndex="1" />
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="106.0" text="Language" GridPane.columnIndex="2" />
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="97.0" text="Pages" GridPane.columnIndex="3" />
@@ -100,17 +109,60 @@
                      </children>
                   </VBox>
                </children>
+               <BorderPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </BorderPane.margin>
             </HBox>
          </center>
          <right>
-            <VBox prefHeight="593.0" prefWidth="299.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="608.0" prefWidth="279.0" BorderPane.alignment="CENTER">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" />
                </children>
             </VBox>
          </right>
          <left>
-            <VBox prefHeight="608.0" prefWidth="260.0" BorderPane.alignment="CENTER" />
+            <VBox id="cardBackground" prefHeight="608.0" prefWidth="331.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </BorderPane.margin>
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="19.0" prefWidth="130.0" text="API Credits">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="25.0">
+                     <children>
+                        <Label text="Internet Archive">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label text="Open Library">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="356.0" text="Background Credit - Emil Widlund (https://unsplash.com/photos/xrbbXIXAWY0)" textOverrun="CLIP" wrapText="true">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label />
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="194.0" prefWidth="261.0">
+                     <children>
+                        <ImageView fx:id="creditImage" fitHeight="226.0" fitWidth="284.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </left>
       </BorderPane>
    </children>

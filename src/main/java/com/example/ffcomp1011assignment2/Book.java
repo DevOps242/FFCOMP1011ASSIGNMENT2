@@ -35,7 +35,10 @@ public class Book {
     @SerializedName("cover_i")
     private Integer imageID;
 
-    public Book(String key, String title, ArrayList<String> author, int editionCount, ArrayList<String> subject, ArrayList<String> publishers, ArrayList<String> language, ArrayList<String> seeds, Integer imageID) {
+    @SerializedName("id_amazon")
+    private ArrayList<String> amazonID;
+
+    public Book(ArrayList<String> amazonID, String key, String title, ArrayList<String> author, int editionCount, ArrayList<String> subject, ArrayList<String> publishers, ArrayList<String> language, ArrayList<String> seeds, Integer imageID) {
         setKey(key);
         setTitle(title);
         setAuthor(author);
@@ -45,7 +48,16 @@ public class Book {
         setLanguage(language);
         setSeeds(seeds);
         setImageID(imageID);
+        setAmazonID(amazonID);
 
+    }
+
+    public ArrayList getAmazonID() {
+        return amazonID;
+    }
+
+    public void setAmazonID(ArrayList amazonID) {
+        this.amazonID = amazonID;
     }
 
     public Integer getImageID() {

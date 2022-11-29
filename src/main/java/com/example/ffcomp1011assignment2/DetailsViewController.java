@@ -7,6 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.*;
+
+
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +24,9 @@ public class DetailsViewController {
 
     @FXML
     private ImageView bookImage;
+
+    @FXML
+    private ImageView creditImage;
 
     @FXML Label bookAuthor;
 
@@ -35,12 +42,16 @@ public class DetailsViewController {
     @FXML
     private Label bookPublisher;
 
-
     @FXML
     private Hyperlink listenLink;
 
     @FXML
+    private Hyperlink purchaseLink;
+
+    @FXML
     private Hyperlink previewLink;
+
+
 
     @FXML
     private BorderPane rootContainer;
@@ -70,10 +81,9 @@ public class DetailsViewController {
     public void getBookDetails(Book book) throws IOException, InterruptedException {
 
 
-        BookDetail bookDetail = APIUtility.getOLBookDetailByID(book.getKey());
+        //BookDetail bookDetail = APIUtility.getOLBookDetailByID(book.getKey());
 
-
-        System.out.println(bookDetail);
+//        System.out.println(bookDetail);
         bookTitle.setText(book.getTitle());
         bookAuthor.setText(String.format("By %s", book.getAuthor()));
         loadImage(book);
@@ -83,8 +93,23 @@ public class DetailsViewController {
         bookPublisher.setText(book.getPublishers().get(0));
 
 //        Come back to these
+
+        previewLink.setText(String.format("https://openlibrary.org/books/%s", book.getKey().replaceAll("/works/", "")));
+        if (book.getAmazonID() != null ){
+            purchaseLink.setText(String.format("https://amazon.com/dp/%s", book.getAmazonID()));
+            purchaseLink.setVisible(true);
+        } else {
+            purchaseLink.setVisible(false);
+        }
+
+        listenLink.setText("");
         listenLink.setVisible(false);
-        previewLink.setVisible(false);
+
+        previewLink.setVisible(true);
+
+        creditImage.setImage(new Image(Main.class.getResourceAsStream("images/openlibrary-logo-tighter.png")));
+
+
     }
 
 

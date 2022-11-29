@@ -56,13 +56,22 @@ public class APIUtility {
 
         bookKey = bookKey.replaceAll("/works/", "");
 
-        String uri = String.format("https://openlibrary.org/books/%s.json", bookKey);
+        String uri = String.format("https://openlibrary.org/works/%s.json", bookKey);
         HttpClient client = HttpClient.newHttpClient();
 
         // Create the https request builder
         HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(uri)).build();
 
         HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+
+//        {"covers": [149216], "first_publish_date": "December 30, 1998", "key": "/works/OL1982658W",
+//                "authors": [{"type": {"key": "/type/author_role"}, "author": {"key": "/authors/OL238509A"}}],
+//            "subjects": ["Java (Computer program language)", "Object-oriented programming (Computer science)",
+//                "Objektorientierte Programmierung", "Java (programmeertaal)", "Java (Programmiersprache)",
+//                "Langages \u00e0 objets (Informatique)", "Java (Langage de programmation)"], "title": "An Introduction to Object-Oriented Programming With Java",
+//                "type": {"key": "/type/work"}, "latest_revision": 7, "revision": 7, "created": {"type": "/type/datetime", "value": "2009-12-09T22:39:56.910459"},
+//            "last_modified": {"type": "/type/datetime", "value": "2021-08-16T08:53:04.534341"}}
 
 
         System.out.println(response.body());
