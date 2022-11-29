@@ -11,7 +11,7 @@ public class Book {
     private String title;
 
     @SerializedName("edition_count")
-    private int editionCount;
+    private Integer editionCount;
 
     @SerializedName("subject_facet")
     private ArrayList<String> subject;
@@ -19,6 +19,8 @@ public class Book {
     @SerializedName("publisher")
     private ArrayList<String> publishers;
 
+    @SerializedName("number_of_pages_median")
+    private Integer numberOfPages;
 
     @SerializedName("author_name")
     private ArrayList<String> author;
@@ -38,7 +40,15 @@ public class Book {
     @SerializedName("id_amazon")
     private ArrayList<String> amazonID;
 
-    public Book(ArrayList<String> amazonID, String key, String title, ArrayList<String> author, int editionCount, ArrayList<String> subject, ArrayList<String> publishers, ArrayList<String> language, ArrayList<String> seeds, Integer imageID) {
+    public Integer getNumberOfPages() {
+        return numberOfPages;
+    }
+
+    public void setNumberOfPages(Integer numberOfPages) {
+        this.numberOfPages = numberOfPages;
+    }
+
+    public Book(Integer numberOfPages, ArrayList<String> amazonID, String key, String title, ArrayList<String> author, Integer editionCount, ArrayList<String> subject, ArrayList<String> publishers, ArrayList<String> language, ArrayList<String> seeds, Integer imageID) {
         setKey(key);
         setTitle(title);
         setAuthor(author);
@@ -49,6 +59,7 @@ public class Book {
         setSeeds(seeds);
         setImageID(imageID);
         setAmazonID(amazonID);
+        setNumberOfPages(numberOfPages);
 
     }
 
@@ -107,7 +118,7 @@ public class Book {
         this.title = title;
     }
 
-    public void setEditionCount(int editionCount) {
+    public void setEditionCount(Integer editionCount) {
         this.editionCount = editionCount;
     }
 
@@ -135,7 +146,7 @@ public class Book {
         return title;
     }
 
-    public int getEditionCount() {
+    public Integer getEditionCount() {
         return editionCount;
     }
 
