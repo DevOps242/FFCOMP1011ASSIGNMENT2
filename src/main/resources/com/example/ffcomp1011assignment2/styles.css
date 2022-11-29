@@ -82,3 +82,10 @@
     -fx-text-fill: circleindicator-color;
     -fx-padding: 5.0;
 }
+
+.circleindicator-label-mini-library{
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 2em;
+    -fx-padding: 5.0;
+}

@@ -98,7 +98,6 @@
                                  </font>
                               </Label>
                               <Hyperlink fx:id="previewLink" prefHeight="39.0" prefWidth="315.0" text="Hyperlink" textOverrun="CLIP" wrapText="true" />
-                              <Hyperlink fx:id="listenLink" prefHeight="50.0" prefWidth="306.0" text="Hyperlink" textOverrun="CLIP" wrapText="true" />
                               <Hyperlink fx:id="purchaseLink" prefHeight="50.0" prefWidth="306.0" text="Hyperlink" textOverrun="CLIP" wrapText="true" />
                            </children>
                            <VBox.margin>
@@ -121,16 +120,16 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <VBox alignment="CENTER" prefHeight="222.0" prefWidth="273.0">
+                  <VBox alignment="CENTER" prefHeight="241.0" prefWidth="273.0">
                      <children>
-                        <Label fx:id="relatedBookLabel1" prefHeight="67.0" prefWidth="273.0" text="Label" textOverrun="CLIP" wrapText="true" />
-                        <ImageView fx:id="relatedBookImage1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="relatedBookLabel1" prefHeight="49.0" prefWidth="273.0" text="Label" textOverrun="CLIP" wrapText="true" />
+                        <ImageView fx:id="relatedBookImage1" fitHeight="109.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" layoutX="12.0" layoutY="38.0" prefHeight="222.0" prefWidth="273.0">
+                  <VBox alignment="CENTER" layoutX="12.0" layoutY="38.0" prefHeight="206.0" prefWidth="273.0">
                      <children>
-                        <Label fx:id="relatedBookLabel2" prefHeight="67.0" prefWidth="263.0" text="Label" textOverrun="CLIP" wrapText="true" />
-                        <ImageView fx:id="relatedBookImage2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="relatedBookLabel2" prefHeight="63.0" prefWidth="263.0" text="Label" textOverrun="CLIP" wrapText="true" />
+                        <ImageView fx:id="relatedBookImage2" fitHeight="93.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </VBox>
                   <VBox fx:id="loaderContainer" alignment="CENTER" prefHeight="167.0" prefWidth="273.0" styleClass="circleindicator-container-mini">

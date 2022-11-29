@@ -56,6 +56,9 @@ public class LibraryViewController  implements Initializable {
     private Button listenButton;
 
     @FXML
+    private Button searchButton;
+
+    @FXML
     private Button previewButton;
 
 
@@ -73,6 +76,15 @@ public class LibraryViewController  implements Initializable {
 
     @FXML
     private  BorderPane loadingContainer;
+
+    @FXML
+    private VBox loaderContainer;
+
+    @FXML
+    private Label loadingMessage;
+
+    @FXML
+    private ProgressIndicator progressIndicatorMini;
 
     private void showLabels(boolean show){
         if (show) {
@@ -105,9 +117,28 @@ public class LibraryViewController  implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadingContainer.setVisible(false);
         showLabels(false);
-        errorLabel.setVisible(false);
+        errorLabel.setVisible(true);
+        errorLabel.setText("Input Book Title Below");
         bookImage.setVisible(false);
         resultsLabel.setVisible (false);
+        searchButton.setDisable(true);
+
+
+        loaderContainer.setVisible(false);
+        loadingMessage.setVisible(false);
+        progressIndicatorMini.setVisible(false);
+
+        searchTextField.textProperty().addListener(((obs, oldText, newText) -> {
+            if (searchTextField.getText() == null || searchTextField.getText().isBlank()){
+                searchButton.setDisable(true);
+                errorLabel.setText("Invalid Input String");
+            } else {
+                errorLabel.setText("Input Book Title Below");
+                searchButton.setDisable(false);
+                searchButton.setText("Search");
+            }
+        }));
+
         bookListView.getSelectionModel().selectedItemProperty().addListener((observableValue, book, bookSelected) -> {
             bookPublisherListView.getItems().clear();
             if (bookSelected != null){
@@ -134,11 +165,14 @@ public class LibraryViewController  implements Initializable {
                     Thread fetchBookImageThread = new Thread(new Runnable() {
                         @Override
                         public void run() {
+                            progressIndicatorMini.setProgress(0);
+                            double progress = 0;
+                            bookImage.setVisible(false);
+                            loaderContainer.setVisible(true);
+                            loadingMessage.setVisible(true);
+                            progressIndicatorMini.setVisible(true);
                             try {
                                 if (bookSelected.getImageID() != null) {
-//                                bookImage.setImage(new Image("https://ia802701.us.archive.org/view_archive.php?archive=/29/items/olcovers123/olcovers123-L.zip&file=1239523-L.jpg"));
-//                                bookImage.setImage(new Image("https://m.media-amazon.com/images/M/MV5BZmRiZDlhMWEtOGIzZi00NGVjLTg3NmYtYmQ2YjgzYjMwOWZjXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg"));
-
                                     // Section take from https://stackoverflow.com/questions/55075985/javafx-image-url-not-loading
                                     // to resolve the issue of my image not loading from the openlibrary.org domain
                                     try{
@@ -150,14 +184,46 @@ public class LibraryViewController  implements Initializable {
                                     } catch(Exception e){
                                         bookImage.setImage(new Image(APIUtility.getBookImage(bookSelected.getImageID())));
                                     }
-
                                 } else {
                                     bookImage.setImage(new Image(Main.class.getResourceAsStream("images/bookDefault.png")));
                                 }
-                                bookImage.setVisible(true);
+
+                                for (int i = 0; i<=10; i++) {
+                                    try{
+                                        Thread.sleep(100);
+                                    } catch (InterruptedException e){
+                                        e.printStackTrace();
+                                    }
+                                    progress += 0.1;
+
+                                    final double reportedProgress = progress;
+                                    Platform.runLater(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            progressIndicatorMini.setProgress(reportedProgress);
+
+                                            // if the progress report is
+                                            if(reportedProgress >= 1 ){
+                                                try{
+                                                    bookImage.setVisible(true);
+                                                    loaderContainer.setVisible(false);
+                                                    loadingMessage.setVisible(false);
+                                                    progressIndicatorMini.setVisible(false);
+                                                } catch(IllegalArgumentException e) {
+                                                    bookImage.setVisible(false);
+                                                    loaderContainer.setVisible(true);
+                                                    loadingMessage.setVisible(true);
+                                                    loadingMessage.setText("Error Loading Image");
+                                                    progressIndicatorMini.setVisible(false);
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
                             } catch(IllegalArgumentException e) {
                                 e.printStackTrace();
                             }
+
                         }
                     });
                     fetchBookImageThread.start();

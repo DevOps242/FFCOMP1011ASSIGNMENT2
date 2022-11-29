@@ -17,6 +17,28 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" styleClass="container" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ffcomp1011assignment2.LibraryViewController">
    <children>
+      <BorderPane fx:id="loadingContainer" prefHeight="800.0" prefWidth="1200.0" styleClass="circleindicator-container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <ProgressIndicator fx:id="progressIndicator" prefHeight="47.0" prefWidth="82.0" progress="0.0" styleClass="circleindicator-label" BorderPane.alignment="CENTER" />
+         </center>
+         <top>
+            <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label styleClass="circleindicator-message" text="Loading books, please wait..." />
+                     </children>
+                  </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="-120.0" top="70.0" />
+               </BorderPane.margin>
+               <padding>
+                  <Insets top="70.0" />
+               </padding>
+            </VBox>
+         </top>
+      </BorderPane>
       <BorderPane fx:id="libraryContainer" layoutX="47.0" layoutY="70.0" prefHeight="800.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <Label id="header" prefHeight="32.0" text="Barrie Library" BorderPane.alignment="CENTER">
@@ -42,13 +64,13 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </BorderPane.margin>
                <children>
-                  <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="112.0" text="errors will go here" />
+                  <Label fx:id="errorLabel" alignment="CENTER" prefHeight="64.0" prefWidth="243.0" text="errors will go here" textOverrun="CLIP" wrapText="true" />
                   <HBox alignment="CENTER" prefHeight="59.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="searchTextField" alignment="CENTER" promptText="Search Books" />
                      </children>
                   </HBox>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#search" text="Search" />
+                  <Button fx:id="searchButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#search" text="Search" />
                   <Label fx:id="resultsLabel" alignment="CENTER">
                      <padding>
                         <Insets top="15.0" />
@@ -116,18 +138,29 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="197.0" prefWidth="501.0">
                      <children>
-                        <ImageView fx:id="bookImage" fitHeight="184.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin></ImageView>
+                        <ImageView fx:id="bookImage" fitHeight="184.0" fitWidth="260.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                      <VBox.margin>
                         <Insets top="50.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="415.0">
+                  <HBox alignment="CENTER" prefHeight="171.0" prefWidth="501.0">
                      <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#getDetails" text="More Details" />
+                        <VBox alignment="CENTER" prefHeight="107.0" prefWidth="273.0">
+                           <children>
+                              <VBox fx:id="loaderContainer" alignment="CENTER" prefHeight="222.0" prefWidth="273.0" styleClass="circleindicator-container-mini">
+                                 <children>
+                                    <Label fx:id="loadingMessage" alignment="CENTER" prefHeight="47.0" prefWidth="232.0" styleClass="circleindicator-message-mini" text="Loading Books...." />
+                                    <ProgressIndicator fx:id="progressIndicatorMini" prefHeight="99.0" prefWidth="65.0" progress="0.0" styleClass="circleindicator-label-mini-library" />
+                                 </children>
+                              </VBox>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Button alignment="CENTER" mnemonicParsing="false" onAction="#getDetails" text="More Details" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
                </children>
@@ -139,28 +172,6 @@
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
-      </BorderPane>
-      <BorderPane fx:id="loadingContainer" prefHeight="800.0" prefWidth="1200.0" styleClass="circleindicator-container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <center>
-            <ProgressIndicator fx:id="progressIndicator" prefHeight="47.0" prefWidth="82.0" progress="0.0" styleClass="circleindicator-label" BorderPane.alignment="CENTER" />
-         </center>
-         <top>
-            <VBox alignment="CENTER" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <Label styleClass="circleindicator-message" text="Loading books, please wait..." />
-                     </children>
-                  </HBox>
-               </children>
-               <BorderPane.margin>
-                  <Insets bottom="-120.0" top="70.0" />
-               </BorderPane.margin>
-               <padding>
-                  <Insets top="70.0" />
-               </padding>
-            </VBox>
-         </top>
       </BorderPane>
    </children>
 </AnchorPane>

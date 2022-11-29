@@ -56,9 +56,6 @@ public class DetailsViewController {
     private Label loadingMessage;
 
     @FXML
-    private Hyperlink listenLink;
-
-    @FXML
     private Hyperlink purchaseLink;
 
     @FXML
@@ -146,10 +143,6 @@ public class DetailsViewController {
             purchaseLink.setVisible(false);
         }
 
-
-//        listenLink.setText("");
-//        listenLink.setVisible(false);
-
         previewLink.setVisible(true);
 
         // load related books.
@@ -179,9 +172,9 @@ public class DetailsViewController {
                                 }
                             }
                         }
-
                     }
                 }
+
                 // loop to increment the progress number
                 for (int i = 0; i<=10; i++) {
                     try{
@@ -236,23 +229,19 @@ public class DetailsViewController {
                                         loadingMessage.setVisible(true);
                                         loadingMessage.setText("No Related Books Available.");
                                     }
-
                                 } catch(IllegalArgumentException e) {
                                     e.printStackTrace();
-//                                    posterImageView.setImage(new Image(Main.class.getResourceAsStream("images/defaultMovie.png")));
                                 }
                             }
                         }
                     });
                 }
-
                 progressIndicator.setProgress(0);
             }
         });
 
         // Start the thread to fetch the poster.
         fetchRelatedBooks.start();
-
     }
 
 
