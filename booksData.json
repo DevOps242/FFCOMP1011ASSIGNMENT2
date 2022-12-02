@@ -1,35 +1,46 @@
 {
-    "numFound": 30290,
+    "numFound": 1,
     "start": 0,
     "numFoundExact": true,
     "docs": [
         {
-            "key": "/works/OL14903221W",
+            "key": "/works/OL24320021W",
             "type": "work",
             "seed": [
-                "/books/OL10037921M",
-                "/books/OL10037744M",
-                "/books/OL10038121M",
-                "/books/OL10037560M",
-                "/books/OL10038282M",
-                "/books/OL10038416M",
-                "/books/OL10038366M",
-                "/books/OL10038472M",
-                "/books/OL10038607M",
-                "/books/OL10038646M",
-                "/books/OL10038704M",
-                "/books/OL10039211M",
-                "/books/OL10039102M",
-                "/books/OL10039167M",
-                "/books/OL10038543M",
-                "/books/OL10038890M",
-                "/books/OL10039562M",
-                "/books/OL10039458M",
-                "/books/OL10039735M",
-                "/books/OL10039781M",
-                "/books/OL10039748M",
-                "/books/OL10040028M",
-                "/books/OL10040084M",
+                "/books/OL32183507M",
+                "/works/OL24320021W"
+            ],
+            "title": "fdsa",
+            "title_suggest": "fdsa",
+            "edition_count": 1,
+            "edition_key": [
+                "OL32183507M"
+            ],
+            "publish_date": [
+                "2021"
+            ],
+            "publish_year": [
+                2021
+            ],
+            "first_publish_year": 2021,
+            "last_modified_i": 1617865610,
+            "ebook_count_i": 0,
+            "ebook_access": "no_ebook",
+            "has_fulltext": false,
+            "public_scan_b": false,
+            "publisher": [
+                "scaaa"
+            ],
+            "publisher_facet": [
+                "scaaa"
+            ],
+            "_version_": 1735666143854592001
+        }
+    ],
+    "num_found": 1,
+    "q": "",
+    "offset": null
+}",
                 "/books/OL10040297M",
                 "/books/OL10040262M",
                 "/books/OL10040055M",
