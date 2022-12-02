@@ -39,14 +39,6 @@ public class Book {
     @SerializedName("id_amazon")
     private ArrayList<String> amazonID;
 
-    public Integer getNumberOfPages() {
-        return numberOfPages;
-    }
-
-    public void setNumberOfPages(Integer numberOfPages) {
-        this.numberOfPages = numberOfPages;
-    }
-
     public Book(Integer numberOfPages, ArrayList<String> amazonID, String key, String title, ArrayList<String> author, Integer editionCount, ArrayList<String> subject, ArrayList<String> publishers, ArrayList<String> language, ArrayList<String> seeds, Integer imageID) {
         setKey(key);
         setTitle(title);
@@ -59,7 +51,14 @@ public class Book {
         setImageID(imageID);
         setAmazonID(amazonID);
         setNumberOfPages(numberOfPages);
+    }
 
+    public Integer getNumberOfPages() {
+        return numberOfPages;
+    }
+
+    public void setNumberOfPages(Integer numberOfPages) {
+        this.numberOfPages = numberOfPages;
     }
 
     public ArrayList getAmazonID() {

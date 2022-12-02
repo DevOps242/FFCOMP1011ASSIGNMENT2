@@ -150,7 +150,7 @@
                            <children>
                               <VBox fx:id="loaderContainer" alignment="CENTER" prefHeight="222.0" prefWidth="273.0" styleClass="circleindicator-container-mini">
                                  <children>
-                                    <Label fx:id="loadingMessage" alignment="CENTER" prefHeight="47.0" prefWidth="232.0" styleClass="circleindicator-message-mini" text="Loading Books...." />
+                                    <Label fx:id="loadingMessage" alignment="CENTER" prefHeight="47.0" prefWidth="232.0" styleClass="circleindicator-message-mini" text="Loading Book Cover...." />
                                     <ProgressIndicator fx:id="progressIndicatorMini" prefHeight="99.0" prefWidth="65.0" progress="0.0" styleClass="circleindicator-label-mini-library" />
                                  </children>
                               </VBox>

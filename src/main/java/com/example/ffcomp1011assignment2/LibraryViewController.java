@@ -132,7 +132,7 @@ public class LibraryViewController  implements Initializable {
         searchTextField.textProperty().addListener(((obs, oldText, newText) -> {
             if (searchTextField.getText() == null || searchTextField.getText().isBlank()){
                 searchButton.setDisable(true);
-                errorLabel.setText("Invalid Input String");
+                errorLabel.setText("Book Title Must Not Be Blank");
             } else {
                 errorLabel.setText("Input Book Title Below");
                 searchButton.setDisable(false);
@@ -248,6 +248,9 @@ public class LibraryViewController  implements Initializable {
         libraryContainer.setVisible(false);
         loadingContainer.setVisible(true);
         bookListView.getItems().clear();
+        listenButton.setVisible(false);
+        previewButton.setVisible(false);
+        purchaseBookButton.setVisible(false);
         Thread fireLoaderThread  = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -354,36 +357,31 @@ public class LibraryViewController  implements Initializable {
 
     @FXML
     public void listenBook(ActionEvent event) {
-        loadComingSoon(event);
+        loadComingSoon(event, "Listen to Book");
     }
 
     @FXML
     public void previewBookWeb(ActionEvent event){
-        // create a alert
-        Alert a = new Alert(Alert.AlertType.NONE);
-        EventHandler<ActionEvent> newEvent = new
-                EventHandler<ActionEvent>() {
-                    public void handle(ActionEvent e)
-                    {
-                        // set alert type
-                        a.setAlertType(Alert.AlertType.WARNING);
-
-                        // show the dialog
-                        a.show();
-                    }
-                };
-        System.out.println("Coming Soon");
-
+        loadComingSoon(event, "Preview Book");
     }
 
     @FXML
     public void purchaseBook(ActionEvent event) {
-        loadComingSoon(event);
+        loadComingSoon(event, "Purchase Book");
     }
 
+    /**
+     * This method loads alert when button is click to inform the user of feature coming soon.
+     * @param event
+     * @param mode
+     */
+    public void loadComingSoon(ActionEvent event, String mode){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Feature Coming Soon...");
+        alert.setHeaderText(String.format("If the link is available for %s, it will show on the details page.",mode));
+        alert.setContentText("Thank you for choosing Barrie Library! :)");
 
-    public void loadComingSoon(ActionEvent event){
-
+        alert.showAndWait();
     }
 
     /**
